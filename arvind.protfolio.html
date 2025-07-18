@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arvind Kumar - Professional Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <style>
+        /* Custom CSS for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Animations for sections other than home */
+        .animate-fade-in { animation: fadeIn 1s ease-out forwards; }
+        .animate-fade-in-up-section { animation: fadeInUp 0.8s ease-out forwards; }
+        .animate-fade-in-right-section { animation: fadeInRight 0.8s ease-out forwards; }
+        .animate-fade-in-left-section { animation: fadeInLeft 0.8s ease-out forwards; }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+
+        /* Ensure Three.js canvas fills the container and is behind content */
+        .three-js-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Behind other content */
+            overflow: hidden;
+        }
+        .three-js-container canvas {
+            display: block;
+        }
+        /* Base styles for the body */
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb; /* bg-gray-50 */
+            color: #374151; /* text-gray-800 */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body class="font-['Inter'] bg-gray-50 text-gray-800 antialiased">
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 bg-white shadow-md z-50 p-4 animate-fade-in">
+        <div class="container mx-auto flex justify-between items-center px-4 sm:px-6 lg:px-8">
+            <div class="text-2xl font-bold text-indigo-600">Arvind Kumar</div>
+            <div class="hidden md:flex space-x-6">
+                <button class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-300 capitalize" data-section-id="home">home</button>
+                <button class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-300 capitalize" data-section-id="about">about</button>
+                <button class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-300 capitalize" data-section-id="projects">projects</button>
+                <button class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-300 capitalize" data-section-id="experience">experience</button>
+                <button class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-300 capitalize" data-section-id="leadership">leadership</button>
+                <button class="nav-link text-gray-700 hover:text-indigo-600 font-medium transition-colors duration-300 capitalize" data-section-id="contact">contact</button>
+            </div>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <div class="md:hidden">
+                <button class="text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home/Hero Section -->
+    <section id="home" class="relative bg-gradient-to-r from-indigo-700 to-purple-800 text-white py-20 md:py-32 flex items-center min-h-screen overflow-hidden">
+        <!-- Three.js Canvas Container -->
+        <div id="three-js-container" class="three-js-container"></div>
+
+        <!-- Content Overlay -->
+        <div class="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-center text-center md:text-left gap-12">
+            <!-- Text Content -->
+            <div class="md:w-1/2 flex flex-col items-center md:items-start">
+                <!-- Profile Picture and Name -->
+                <div class="flex flex-col sm:flex-row items-center justify-center mb-6">
+                    <div class="w-48 h-48 sm:w-64 sm:h-64 lg:w-80 lg:h-80 bg-gray-200 rounded-full overflow-hidden shadow-xl border-4 border-yellow-400 flex items-center justify-center mb-4 sm:mb-0 sm:mr-6">
+                        <img
+                            src="arvind-profile.jpg"
+                            alt="Arvind Kumar Profile"
+                            class="w-full h-full object-contain"
+                            onerror="this.onerror=null; this.src='https://placehold.co/400x400/9333ea/ffffff?text=Image+Error';"
+                        />
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight">
+                        Hi, I'm <span class="text-yellow-300">Arvind Kumar</span>
+                    </h1>
+                </div>
+
+                <p class="text-xl sm:text-2xl mb-6 opacity-90">
+                    AWS-certified Computer Science Engineer | AI/ML & Cloud Specialist
+                </p>
+                <p class="text-lg mb-8 max-w-3xl mx-auto md:mx-0 opacity-80">
+                    AWS-certified Computer Science Engineering graduate with strong hands-on experience in Artificial Intelligence (AI), Machine Learning (ML), and Cloud Computing. Skilled in designing and developing full-stack, real-world solutions using Python, TensorFlow, scikit-learn, and AWS services. Proven ability to build reliable NLP models with over ninety-five percent accuracy and recommendation systems that improved user engagement by fifteen percent.
+                </p>
+                <div class="flex justify-center md:justify-start space-x-4">
+                    <button id="arunnirmala1882@gmail.com" class="bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-bold py-3 px-8 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+                        Hire Me
+                    </button>
+                    <a href="arvind.cv.pdf" download="arvind-kumar-cv.pdf" class="border-2 border-white hover:border-yellow-400 text-white hover:text-yellow-400 font-bold py-3 px-8 rounded-full transform hover:scale-105 transition-all duration-300 ease-in-out">
+                        Download CV
+                    </a>
+                    <a href="https://www.linkedin.com/in/arvindkumar001/"_blank" rel="noopener noreferrer" class="border-2 border-white hover:border-yellow-400 text-white hover:text-yellow-400 font-bold py-3 px-8 rounded-full transform hover:scale-105 transition-all duration-300 ease-in-out">
+                        LinkedIn Profile
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="about" class="py-16 md:py-24 bg-white animate-fade-in-section delay-200">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-indigo-800 mb-12 animate-fade-in-up-section">About Me</h2>
+
+            <!-- Professional Summary (expanded) -->
+            <div class="mb-12 p-6 bg-indigo-50 rounded-lg shadow-md animate-fade-in-up-section delay-100">
+                <h3 class="text-2xl font-semibold text-indigo-700 mb-4">A Deeper Dive</h3>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    As an AWS-certified Computer Science Engineering graduate, I bring a robust foundation in Artificial Intelligence, Machine Learning, and Cloud Computing. My expertise lies in transforming complex challenges into practical, full-stack solutions. I thrive on building reliable NLP models, evidenced by achieving over 95% accuracy, and developing recommendation systems that significantly boost user engagement. My experience extends to crafting high-performance, responsive web applications, ensuring an optimized user experience across all devices. I am adept at navigating the entire software development lifecycle, from initial design to deployment and operations, and excel in collaborative, cross-functional team environments. My leadership in large-scale events, managing over 34,000 participants with 98% operational efficiency, underscores my strong problem-solving abilities, meticulous attention to detail, and a commitment to continuous learning. I am passionate about leveraging cutting-edge technologies to create impactful, scalable, and user-centric solutions.
+                </p>
+            </div>
+
+            <!-- Technical Expertise -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md animate-fade-in-left-section delay-200">
+                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Programming Languages</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2" id="programming-languages">
+                        <!-- Content will be injected by JS -->
+                    </ul>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md animate-fade-in-up-section delay-300">
+                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Software Tools</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2" id="software-tools">
+                        <!-- Content will be injected by JS -->
+                    </ul>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md animate-fade-in-right-section delay-400">
+                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Technical Skills</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2" id="technical-skills">
+                        <!-- Content will be injected by JS -->
+                    </ul>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md animate-fade-in-left-section delay-500">
+                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Soft Skills</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2" id="soft-skills">
+                        <!-- Content will be injected by JS -->
+                    </ul>
+                </div>
+                <div class="bg-gray-100 p-6 rounded-lg shadow-md animate-fade-in-up-section delay-600">
+                    <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Digital Marketing</h3>
+                    <ul class="list-disc list-inside text-gray-700 space-y-2" id="digital-marketing">
+                        <!-- Content will be injected by JS -->
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Education -->
+            <div class="bg-indigo-50 p-6 rounded-lg shadow-md animate-fade-in-up-section delay-700">
+                <h3 class="text-2xl font-semibold text-indigo-700 mb-4">Education</h3>
+                <p class="text-xl font-medium text-gray-800" id="education-degree"></p>
+                <p class="text-lg text-gray-700" id="education-university"></p>
+                <p class="text-lg font-medium text-gray-800 mt-4">Coursework:</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-1" id="education-coursework">
+                    <!-- Content will be injected by JS -->
+                </ul>
+                <p class="text-lg font-medium text-gray-800 mt-4">Activities:</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-1" id="education-activities">
+                    <!-- Content will be injected by JS -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-16 md:py-24 bg-gray-50 animate-fade-in-section delay-300">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-indigo-800 mb-12 animate-fade-in-up-section">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-container">
+                <!-- Content will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-16 md:py-24 bg-white animate-fade-in-section delay-400">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-indigo-800 mb-12 animate-fade-in-up-section">Professional Experience</h2>
+            <div class="space-y-8" id="experience-container">
+                <!-- Content will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Leadership & Responsibilities Section -->
+    <section id="leadership" class="py-16 md:py-24 bg-gray-50 animate-fade-in-section delay-500">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-bold text-center text-indigo-800 mb-12 animate-fade-in-up-section">Leadership & Responsibilities</h2>
+            <div class="space-y-8" id="leadership-container">
+                <!-- Content will be injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-24 bg-gradient-to-r from-indigo-700 to-purple-800 text-white animate-fade-in-section delay-600">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-4xl font-bold mb-8 animate-fade-in-up-section">Get In Touch</h2>
+            <p class="text-lg mb-8 max-w-2xl mx-auto opacity-90 animate-fade-in-up-section delay-100">
+                Have a project in mind or just want to chat? Feel free to connect!
+            </p>
+            <div class="flex flex-col items-center space-y-4 text-lg">
+                <p class="flex items-center space-x-2 animate-fade-in-up-section delay-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                    <span class="font-semibold">Email:</span>
+                    <a href="mailto:arunnirmala1882@gmail.com" class="text-yellow-300 hover:underline">arunnirmala1882@gmail.com</a>
+                </p>
+                <p class="flex items-center space-x-2 animate-fade-in-up-section delay-300">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.65A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                    <span class="font-semibold">Phone:</span> (+971) 564513536
+                </p>
+                <p class="flex items-center space-x-2 animate-fade-in-up-section delay-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    <span class="font-semibold">LinkedIn:</span>
+                    <a href="https://www.linkedin.com/in/arvindkumar001/" target="_blank" rel="noopener noreferrer" class="text-yellow-300 hover:underline">linkedin.com/in/arvind-kumar</a>
+                </p>
+                <p class="flex items-center space-x-2 animate-fade-in-up-section delay-500">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.1.47-2.15 1.23-3.02A12.6 12.6 0 0 0 22 4v.5L20 7h-.5a7.8 7.8 0 0 0-5.5 2.5C13 10.5 13 11 13 12v1a4.8 4.8 0 0 0-1 3.5v4"/><path d="M12 17c-3.1 0-6.1-1.3-8-4a12.6 12.6 0 0 0-2-3v-.5L4 4h.5a12.6 12.6 0 0 0 3.02-1.23C8.85 2.47 9.9 2.08 11 2c3.5 0 5.5 3 5.5 6"/><path d="M9 18v-3.5a4.8 4.8 0 0 0-1-3.5c-3 0-6-2-6-5.5"/><path d="M12 17c-3.1 0-6.1-1.3-8-4a12.6 12.6 0 0 0-2-3v-.5L4 4h.5a12.6 12.6 0 0 0 3.02-1.23C8.85 2.47 9.9 2.08 11 2c3.5 0 5.5 3 5.5 6"/></svg>
+                    <span class="font-semibold">GitHub:</span>
+                    <a href="https://github.com/Arvind01kumar" target="_blank" rel="noopener noreferrer" class="text-yellow-300 hover:underline">github.com/Arvind01kumar</a>
+                </p>
+                <p class="flex items-center space-x-2 animate-fade-in-up-section delay-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M12 12a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/><path d="M19 10c0 7-7 9-7 9s-7-2-7-9a7 7 0 0 1 14 0Z"/><path d="M12 21.75V22"/></svg>
+                    <span class="font-semibold">Location:</span> Sharjah, UAE
+                </p>
+                <p class="flex items-center space-x-2 animate-fade-in-up-section delay-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check"><path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/><path d="m9 16 2 2 4-4"/></svg>
+                    <span class="font-semibold">Expected Graduation:</span> June 2025
+                </p>
+            </div>
+            <div class="mt-12 text-gray-300 text-sm">
+                &copy; <span id="current-year"></span> Arvind Kumar. All rights reserved.
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const portfolioData = {
+            name: "ARVIND KUMAR",
+            tagline: "AWS-certified Computer Science Engineer | AI/ML & Cloud Specialist",
+            summary: "AWS-certified Computer Science Engineering graduate with strong hands-on experience in Artificial Intelligence (AI), Machine Learning (ML), and Cloud Computing. Skilled in designing and developing full-stack, real-world solutions using Python, TensorFlow, scikit-learn, and AWS services. Proven ability to build reliable NLP models with over ninety-five percent accuracy and recommendation systems that improved user engagement by fifteen percent. Experienced in developing responsive, high-performance web applications, including clones of popular social media platforms with optimized user experience. Adept at managing end-to-end software development lifecycles and collaborating with cross-functional teams in design, engineering, and operations. Successfully led logistics for large-scale events with more than thirty-four thousand participants, achieving ninety-eight percent operational efficiency. Known for strong problem-solving abilities, attention to detail, and a continuous learning mindset. Passionate about using emerging technologies to create impactful, scalable, and user-focused solutions.",
+            contact: {
+                phone: "(+971) 564513536",
+                email: "arunnirmala1882@gmail.com",
+                linkedin: "https://www.linkedin.com/in/arvindkumar001/",
+                github: "github.com/Arvind01kumar",
+                location: "Sharjah, UAE",
+                expectedGraduation: "June 2025"
+            },
+            technicalExpertise: {
+                programmingLanguages: ["C/C++", "Java", "Python", "HTML/CSS", "SQL"],
+                softwareTools: ["Visual Studio", "MS-Excel", "Power BI", "Microsoft Office", "AWS"],
+                technicalSkills: ["Data Structures", "AI/ML", "Cloud Computing"],
+                softSkills: ["Leadership", "Event Management", "Teamwork", "Project Management"],
+                digitalMarketing: ["SEO (Search Engine Optimization)", "Google Ads", "Facebook Ads Manager", "Instagram Ads", "YouTube Ads"]
+            },
+            education: {
+                degree: "B.Tech in Computer Science & Engineering",
+                university: "Kalinga Institute of Industrial Technology",
+                years: "2021-2025",
+                coursework: ["Advanced ML", "Cloud Architecture", "Big Data Analytics"],
+                activities: ["KIIT Fest Organizer ('24-25)", "MUN Secretariat", "TEDx Hospitality Lead"]
+            },
+            projects: [
+                {
+                    title: "AyurBot: AI Wellness Guide",
+                    technologies: "TensorFlow, NLP, AWS",
+                    description: "Achieved 95.8% intent accuracy using BERT embeddings, deployed on EC2 with 0.8s response time. Handled diverse user queries through intent classification and custom response generation, improving user satisfaction and system adaptability. Incorporated AWS Lambda functions for scalable backend processing, reducing server downtime and latency. Integrated multi-intent support and fallback mechanisms to handle ambiguous inputs effectively. Implemented user feedback loop integration to continuously improve model responses and personalization."
+                },
+                {
+                    title: "Stock Market Forecaster",
+                    technologies: "Python, ARIMA-LSTM Hybrid",
+                    description: "Predicted NIFTY50 trends with 89% accuracy using 5+ years of historical data. Engineered advanced hybrid models integrating statistical (ARIMA) and deep learning (LSTM) approaches for robust forecasting."
+                },
+                {
+                    title: "AI Recommendation System",
+                    technologies: "Vector Embeddings, TensorFlow",
+                    description: "Boosted recommendation accuracy by 15 percentage points using translation-based models with user-item interaction embeddings."
+                },
+                {
+                    title: "Social Media Clones",
+                    technologies: "MERN Stack, WebSockets",
+                    description: "Developed Instagram/Spotify clones with 2s load time and 100% device responsiveness. Integrated real-time features using WebSockets and implemented clean UI with fully mobile-optimized layouts."
+                }
+            ],
+            experience: [
+                {
+                    title: "Data Science and Analytics Intern (Remote)",
+                    company: "Zidio Development",
+                    duration: "Apr 2025 - May 2025",
+                    description: [
+                        "Collaborated with cross-functional teams to design, develop, and test new product features, including enhancing analytics dashboards and automation tools using Python and TensorFlow.",
+                        "Developed and analyzed stock market time series data, performing data preprocessing, feature engineering, and model implementation to uncover trends and support predictive analytics.",
+                        "Contributed to debugging, optimizing data workflows, and improving machine learning model performance in a remote and agile development environment.",
+                        "Presented predictive analytics results to stakeholders through visually compelling reports, leading to improved product planning.",
+                        "Assisted in automating routine data pipeline tasks, improving workflow efficiency by 20%."
+                    ]
+                }
+            ],
+            leadership: [
+                {
+                    title: "Logistics Executive Lead",
+                    event: "KIIT Fest 8.0 (34,000+ Participants)",
+                    duration: "Aug 2022 - Feb 2025",
+                    description: [
+                        "Managed distribution of 34,000 RFID bands within 48 hours, coordinating a team to handle over 800 entries per minute and ensure smooth operations.",
+                        "Implemented real-time tracking and reporting systems to monitor progress and quickly resolve bottlenecks, maintaining high accuracy in attendance data.",
+                        "Coordinated cross-team communication between logistics, security, and entry staff to ensure smooth crowd management during peak hours."
+                    ]
+                },
+                {
+                    title: "Digital Marketing Head",
+                    event: "KIIT MUN 2024 (1,400+ Delegates)",
+                    duration: "Sep 2024",
+                    description: [
+                        "Led digital campaigns and cold outreach strategies that drove a 40% increase in event registrations.",
+                        "Analyzed campaign metrics and optimized social media content, significantly boosting engagement and international delegate participation.",
+                        "Spearheaded influencer outreach and partnerships that expanded event visibility across key student networks."
+                    ]
+                },
+                {
+                    title: "Hospitality Director",
+                    event: "TEDxKIITUniversity 2024",
+                    duration: "Aug 2024",
+                    description: [
+                        "Coordinated services for 1,000+ attendees with 95% satisfaction rating.",
+                        "Managed vendor relationships and volunteer teams to deliver seamless guest experiences while optimizing event budgets.",
+                        "Led the onboarding and training of hospitality volunteers, improving team efficiency and guest service quality."
+                    ]
+                }
+            ]
+        };
+
+        const profilePictureUrl = "http://googleusercontent.com/file_content/1";
+
+        // Function to populate lists
+        function populateList(elementId, items) {
+            const ul = document.getElementById(elementId);
+            if (ul) {
+                ul.innerHTML = ''; // Clear existing content
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    ul.appendChild(li);
+                });
+            }
+        }
+
+        // Function to populate projects
+        function populateProjects() {
+            const container = document.getElementById('projects-container');
+            if (container) {
+                container.innerHTML = '';
+                portfolioData.projects.forEach((project, index) => {
+                    const div = document.createElement('div');
+                    div.className = `bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 transform hover:-translate-y-1 animate-fade-in-up-section`;
+                    div.style.animationDelay = `${0.1 * index}s`;
+                    div.innerHTML = `
+                        <h3 class="text-2xl font-semibold text-indigo-700 mb-3">${project.title}</h3>
+                        <p class="text-md font-medium text-purple-600 mb-4">${project.technologies}</p>
+                        <p class="text-gray-700 leading-relaxed">${project.description}</p>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        // Function to populate experience
+        function populateExperience() {
+            const container = document.getElementById('experience-container');
+            if (container) {
+                container.innerHTML = '';
+                portfolioData.experience.forEach((exp, index) => {
+                    const div = document.createElement('div');
+                    div.className = `bg-gray-50 p-6 rounded-lg shadow-md animate-fade-in-left-section`;
+                    div.style.animationDelay = `${0.1 * index}s`;
+                    let descriptionHtml = exp.description.map(point => `<li>${point}</li>`).join('');
+                    div.innerHTML = `
+                        <h3 class="text-2xl font-semibold text-indigo-700">${exp.title}</h3>
+                        <p class="text-lg text-gray-800 font-medium">${exp.company} <span class="text-gray-600">(${exp.duration})</span></p>
+                        <ul class="list-disc list-inside text-gray-700 mt-4 space-y-2">${descriptionHtml}</ul>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        // Function to populate leadership
+        function populateLeadership() {
+            const container = document.getElementById('leadership-container');
+            if (container) {
+                container.innerHTML = '';
+                portfolioData.leadership.forEach((role, index) => {
+                    const div = document.createElement('div');
+                    div.className = `bg-white p-6 rounded-lg shadow-md animate-fade-in-right-section`;
+                    div.style.animationDelay = `${0.1 * index}s`;
+                    let descriptionHtml = role.description.map(point => `<li>${point}</li>`).join('');
+                    div.innerHTML = `
+                        <h3 class="text-2xl font-semibold text-indigo-700">${role.title}</h3>
+                        <p class="text-lg text-gray-800 font-medium">${role.event} <span class="text-gray-600">(${role.duration})</span></p>
+                        <ul class="list-disc list-inside text-gray-700 mt-4 space-y-2">${descriptionHtml}</ul>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        }
+
+        // Three.js setup
+        let scene, camera, renderer, dodecahedron;
+
+        function initThreeJS() {
+            const mount = document.getElementById('three-js-container');
+            if (!mount) return;
+
+            // Scene setup
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x1a202c); // Dark background for contrast
+
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(75, mount.clientWidth / mount.clientHeight, 0.1, 1000);
+            camera.position.z = 5;
+
+            // Renderer setup
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true }); // alpha: true for transparent background
+            renderer.setSize(mount.clientWidth, mount.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            mount.appendChild(renderer.domElement);
+
+            // Add a simple 3D object (e.g., a rotating dodecahedron)
+            const geometry = new THREE.DodecahedronGeometry(2, 0); // Dodecahedron for a professional, abstract look
+            const material = new THREE.MeshPhongMaterial({ color: 0x667eea, flatShading: true }); // Purple color, flat shading
+            dodecahedron = new THREE.Mesh(geometry, material);
+            scene.add(dodecahedron);
+
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0x404040); // Soft white light
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8); // White directional light
+            directionalLight.position.set(1, 1, 1).normalize();
+            scene.add(directionalLight);
+
+            animateThreeJS();
+        }
+
+        // Animation loop
+        function animateThreeJS() {
+            requestAnimationFrame(animateThreeJS);
+
+            if (dodecahedron) {
+                dodecahedron.rotation.x += 0.005;
+                dodecahedron.rotation.y += 0.005;
+            }
+
+            renderer.render(scene, camera);
+        }
+
+        // Handle window resize for Three.js
+        function onWindowResize() {
+            const mount = document.getElementById('three-js-container');
+            if (mount && camera && renderer) {
+                camera.aspect = mount.clientWidth / mount.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(mount.clientWidth, mount.clientHeight);
+            }
+        }
+
+        // Scroll to section function
+        function scrollToSection(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                // Update active navigation link
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('text-indigo-600', 'border-b-2', 'border-indigo-600');
+                });
+                const currentActive = document.querySelector(`.nav-link[data-section-id="${id}"]`);
+                if (currentActive) {
+                    currentActive.classList.add('text-indigo-600', 'border-b-2', 'border-indigo-600');
+                }
+            }
+        }
+
+        // DOMContentLoaded event listener
+        window.addEventListener('DOMContentLoaded', () => {
+            // Set current year in footer
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Populate About Me section lists
+            populateList('programming-languages', portfolioData.technicalExpertise.programmingLanguages);
+            populateList('software-tools', portfolioData.technicalExpertise.softwareTools);
+            populateList('technical-skills', portfolioData.technicalExpertise.technicalSkills);
+            populateList('soft-skills', portfolioData.technicalExpertise.softSkills);
+            populateList('digital-marketing', portfolioData.technicalExpertise.digitalMarketing);
+
+            // Populate Education
+            document.getElementById('education-degree').textContent = portfolioData.education.degree;
+            document.getElementById('education-university').textContent = `${portfolioData.education.university} (${portfolioData.education.years})`;
+            populateList('education-coursework', portfolioData.education.coursework);
+            populateList('education-activities', portfolioData.education.activities);
+
+            // Populate Projects, Experience, Leadership
+            populateProjects();
+            populateExperience();
+            populateLeadership();
+
+            // Initialize Three.js
+            initThreeJS();
+
+            // Add event listeners for navigation buttons
+            document.querySelectorAll('.nav-link').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    const sectionId = event.target.dataset.sectionId;
+                    scrollToSection(sectionId);
+                });
+            });
+
+            // Add event listener for "View Projects" button
+            document.getElementById('view-projects-btn').addEventListener('click', () => {
+                scrollToSection('projects');
+            });
+
+            // Add event listener for "Hire Me" button
+            document.getElementById('hire-me-btn').addEventListener('click', () => {
+                scrollToSection('contact');
+            });
+
+            // Handle active navigation link on scroll
+            const sections = document.querySelectorAll('section[id]');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5 // Adjust as needed
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('text-indigo-600', 'border-b-2', 'border-indigo-600');
+                        });
+                        const currentActive = document.querySelector(`.nav-link[data-section-id="${entry.target.id}"]`);
+                        if (currentActive) {
+                            currentActive.classList.add('text-indigo-600', 'border-b-2', 'border-indigo-600');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        // Add resize listener for Three.js
+        window.addEventListener('resize', onWindowResize);
+
+        // Cleanup function (optional, for more complex scenarios)
+        window.onbeforeunload = () => {
+            if (renderer) {
+                renderer.dispose();
+                if (scene) {
+                    scene.traverse(object => {
+                        if (object.isMesh) {
+                            object.geometry.dispose();
+                            object.material.dispose();
+                        }
+                    });
+                }
+            }
+        };
+    </script>
+</body>
+</html>
