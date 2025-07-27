@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hire Arvind Kumar - Let's Collaborate</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts for Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in-up {
+            opacity: 0; /* Start hidden */
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        
+        /* Custom glow effect for cards */
+        .contact-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.25);
+        }
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 1.25rem; /* 20px */
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, rgba(255,255,255,0.3), rgba(255,255,255,0.1)) border-box;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) padding-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            transition: all 0.3s ease;
+            opacity: 0.5;
+        }
+        .contact-card:hover::before {
+            opacity: 1;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, #fef08a, #818cf8) border-box;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-[#111827] via-[#1a202c] to-[#3730a3] text-gray-200 antialiased">
+
+    <div class="min-h-screen flex flex-col items-center justify-center p-4 sm:p-6 lg:p-8 overflow-hidden">
+        
+        <!-- Back to Portfolio Link -->
+        <div class="absolute top-6 left-6 animate-fade-in-up">
+            <a href="index.html" class="text-indigo-400 hover:text-yellow-300 font-semibold transition-colors duration-300 flex items-center space-x-2 group">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-left transition-transform duration-300 group-hover:-translate-x-1"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+                <span>Back to Portfolio</span>
+            </a>
+        </div>
+
+        <div class="text-center w-full max-w-5xl mx-auto">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mb-4 animate-fade-in-up delay-100">
+                Ready to <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-indigo-400">Collaborate</span>?
+            </h1>
+            <p class="text-lg sm:text-xl text-indigo-200 max-w-3xl mx-auto mb-12 animate-fade-in-up delay-200">
+                I build exceptional digital solutions. If you have a project in mind, a problem to solve, or just want to connect—I'm here to help bring your vision to life.
+            </p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+
+                <!-- Option 1: Email Form -->
+                <div class="contact-card bg-black/20 backdrop-blur-xl p-8 rounded-2xl shadow-2xl animate-fade-in-up delay-300">
+                    <h2 class="text-3xl font-bold mb-4 text-white flex items-center space-x-3">
+                        <span>📧</span>
+                        <span>Drop a Line</span>
+                    </h2>
+                    <p class="mb-6 text-indigo-200">Perfect for detailed project proposals, specs, or attaching files. I'll get back to you within 24 hours.</p>
+                    <form id="email-form">
+                        <div class="mb-4">
+                            <label for="subject" class="block text-sm font-medium mb-1 text-indigo-300">Subject</label>
+                            <input type="text" id="subject" name="subject" value="Project Inquiry" class="w-full bg-black/20 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all">
+                        </div>
+                        <div class="mb-6">
+                            <label for="message" class="block text-sm font-medium mb-1 text-indigo-300">Message</label>
+                            <textarea id="message" name="message" rows="3" class="w-full bg-black/20 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-yellow-400 transition-all" placeholder="Hi Arvind, let's talk about..." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full text-center bg-yellow-400 hover:bg-yellow-500 text-indigo-900 font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out">
+                            Compose Email
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Option 2: WhatsApp -->
+                <div class="contact-card bg-black/20 backdrop-blur-xl p-8 rounded-2xl shadow-2xl animate-fade-in-up delay-400">
+                    <h2 class="text-3xl font-bold mb-4 text-white flex items-center space-x-3">
+                        <span>💬</span>
+                        <span>Start a Chat</span>
+                    </h2>
+                    <p class="mb-6 text-indigo-200">Have a quick question or want a more informal chat? WhatsApp is perfect for a fast response.</p>
+                    <a href="https://wa.me/971564513536" target="_blank" rel="noopener noreferrer" class="w-full text-center bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out inline-block">
+                        Chat on WhatsApp
+                    </a>
+                </div>
+
+                <!-- Option 3: Phone Call -->
+                <div class="contact-card bg-black/20 backdrop-blur-xl p-8 rounded-2xl shadow-2xl animate-fade-in-up delay-500">
+                     <h2 class="text-3xl font-bold mb-4 text-white flex items-center space-x-3">
+                        <span>📞</span>
+                        <span>Let's Talk</span>
+                    </h2>
+                    <p class="mb-6 text-indigo-200">Prefer to talk things through? Ring me directly for an immediate discussion about your project.</p>
+                    <a href="tel:+971564513536" class="w-full text-center bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all duration-300 ease-in-out inline-block">
+                        Call Now
+                    </a>
+                    <p class="text-center mt-4 text-indigo-200">or dial: (+971) 564513536</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="absolute bottom-6 text-center text-gray-400 text-sm animate-fade-in-up delay-700">
+            &copy; <span id="current-year"></span> Arvind Kumar. All Rights Reserved.
+        </div>
+    </div>
+
+    <script>
+        // Set the current year in the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Handle email form submission
+        const emailForm = document.getElementById('email-form');
+        if (emailForm) {
+            emailForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+                
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                const recipient = 'arunnirmala1882@gmail.com';
+
+                // Encode components for the mailto link
+                const mailtoLink = `mailto:${recipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+
+                // Open the user's default email client
+                window.location.href = mailtoLink;
+            });
+        }
+    </script>
+</body>
+</html>
